@@ -1,0 +1,30 @@
+1. echo "YourName RegNo" > plain.txt
+2. openssl aes-128-cbc -e -in plain.txt -out cipher.bin -k "password" -nosalt
+pur:Encrypts the plaintext file using AES-128 in CBC mode.
+3. openssl aes-128-cbc -d -in cipher1.bin -out pt.txt -k "password" -nosalt
+pur:Decrypts the AES-encrypted file to get back the original plaintext.
+4. cat pt.txt
+pur:display the decrypted content
+5.Avalenche effect test:To observe how a small change in plaintext causes a large change in ciphertext.
+6. openssl genrsa -out pvtkey.pem
+openssl rsa -pubout -in pvtkey.pem -out pubkey.pem
+pur:Generates a private key and derives a public key for RSA.
+7. openssl rsa -text -in pvtkey.pem
+pur:Prints the private key details in a readable format (includes modulus and exponents).
+8.openssl rsautl -encrypt -in plain.txt -pubin -inkey pubkey.pem -out c1.bin
+pur: Encrypts plaintext using the public key
+9. xxd c1.bin
+pur:View ciphertext in hexadecimal form.
+10. openssl rsautl -decrypt -in c1.bin -inkey pvtkey.pem -out dec1.txt
+pur:Decrypts RSA ciphertext using the private key.
+11.cat dec1.txt
+pur:To verify RSA decrytion correctness
+12. openssl md5 plain.txt
+pur:Produces an MD5 hash (message digest) of the file.
+13. openssl sha256 plain.txt
+Produces a SHA-256 hash of the file.
+14. openssl dgst -sha1 -sign pvtkey.pem -out s.bin plain.txt
+pur:Creates a digital signature of the file using SHA-1 hash and private key.
+15.openssl dgst -sha1 -verify pubkey.pem -signature s.bin plain.txt
+pur:Verifies the signature using the public key.
+

